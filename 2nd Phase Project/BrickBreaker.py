@@ -51,7 +51,7 @@ def inst_bricks(c,r):
             allbricks.add(brick)
             allsprites.add(brick)
         
-inst_bricks(7,9)
+inst_bricks(7,8)
 
 #regenarating bricks after every round(3lives)
 def removeBricks():
@@ -82,6 +82,28 @@ while running:
     # setting the background image
     screen.blit(background_image, (0, 0))
     
+    # initial message to start game
+    if not start and lives > 0:
+        # main message 
+        title_font = pygame.font.Font(None, 80)  
+        title_text = title_font.render("Ready or Not?", True, (200,0,15))  
+        title_rect = title_text.get_rect(center=(LENGTH // 2 +13, HEIGHT // 2 + 94))
+        
+        # Shadow for the main message
+        shadow_text = title_font.render("Ready or Not?", True, (0, 0, 0))  
+        shadow_rect = shadow_text.get_rect(center=(LENGTH // 2 +17 , HEIGHT // 2 + 97))
+        
+        # blinking message
+        subtitle_font = pygame.font.Font(None, 40) 
+        subtitle_text = subtitle_font.render("[press space to start]", True, (255, 185, 0))
+        subtitle_rect = subtitle_text.get_rect(center=(LENGTH // 2 + 5, HEIGHT // 2 + 140))
+        
+        screen.blit(shadow_text, shadow_rect)
+        screen.blit(title_text, title_rect)
+        if pygame.time.get_ticks() % 2000 < 1500:
+            screen.blit(subtitle_text, subtitle_rect)
+
+        
     #moving the paddle with keys
     arrows =pygame.key.get_pressed()
     if arrows[pygame.K_RIGHT]:
@@ -147,7 +169,7 @@ while running:
             lives=3
             score=0
             removeBricks()
-            inst_bricks(7,9)
+            inst_bricks(7,8)
             game_over_sound_played = False 
             victory_sound_played = False
             
@@ -223,10 +245,17 @@ while running:
                 pygame.display.update()  # Update and keep for 2seconds
                 pygame.time.delay(2000)
                 
+                #reset the score and lives
+                score = 0
+                lives = 3
+                
                 ball.initialPosition()
                 removeBricks()
-                inst_bricks(7,9)
+                inst_bricks(7,8)
                 start=False
+                #reset the score and lives
+                score = 0
+                lives = 3
         
     #drawing a boundary on score and lives
     pygame.draw.line(screen, BLACK, [0, HEIGHT-35], [LENGTH, HEIGHT-35],5)

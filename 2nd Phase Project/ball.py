@@ -34,7 +34,7 @@ class Ball(pygame.sprite.Sprite):
         # outline
         pygame.draw.circle(self.image, OUTLINE_COLOR, (15, 15), 15, width=2)
     
-    # Generate a non-zero x and y velocity to ensure diagonal movement
+    # Generates a non-zero x and y velocity to ensure diagonal movement
     def generate_initial_velocity(self):        
         while True:
             x_velocity = random.choice([-1, 1]) * self.current_speed
