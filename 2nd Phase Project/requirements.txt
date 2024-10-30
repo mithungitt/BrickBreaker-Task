@@ -1,0 +1,7 @@
+Python packages used for this project includes:
+
+1. Pygame (pip was used to install this)
+2. random
+
+Other resources include background image and the various audios for sound effects.
+        
